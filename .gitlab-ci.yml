@@ -11,6 +11,6 @@ test-control:
 test-rules:
   stage: test
   rules:
-    - if: '$CI_COMMIT_MESSAGE !~ /^\[skip\]/'
+    - if: '$CI_COMMIT_MESSAGE !~ /^\[skip\] /'
   script:
     - echo "$CI_COMMIT_MESSAGE"
