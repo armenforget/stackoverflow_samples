@@ -8,11 +8,3 @@ test-rules:
       when: never
   script:
     - echo "$CI_COMMIT_MESSAGE"
-
-test-only:
-  stage: test
-  except:
-    variables:
-      - $CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/
-  script:
-    - echo "$CI_COMMIT_MESSAGE"
