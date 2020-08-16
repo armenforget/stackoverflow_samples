@@ -4,7 +4,7 @@ stages:
 test-rules:
   stage: test
   rules:
-    - if: '$CI_COMMIT_MESSAGE =~ /^\[maven-scm\] .*$/'
+    - if: '$CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/'
       when: never
     - when: always
   script:
@@ -14,6 +14,6 @@ test-only:
   stage: test
   except:
     variables:
-      - '$CI_COMMIT_MESSAGE =~ /^\[maven-scm\] .*$/'
+      - $CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/
   script:
     - echo "$CI_COMMIT_MESSAGE"
