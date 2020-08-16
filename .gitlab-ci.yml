@@ -7,21 +7,12 @@ test-control:
   script:
     - echo "$CI_COMMIT_MESSAGE"
 
-# Don't run job if [skip] in commit message
+# Don't run job if [skip] in commit message...
 test-rules:
   stage: test
   rules:
     - if: '$CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/'
       when: never
     - when: always
-  script:
-    - echo "$CI_COMMIT_MESSAGE"
-
-# Don't run job if [skip] in commit message
-test-only:
-  stage: test
-  except:
-    variables:
-      - $CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/
   script:
     - echo "$CI_COMMIT_MESSAGE"
