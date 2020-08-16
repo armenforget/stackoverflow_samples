@@ -12,8 +12,8 @@ test-rules:
 
 test-only:
   stage: test
-  only:
+  except:
     variables:
-      - $CI_COMMIT_MESSAGE !~ /^\[skip\] .*$/
+      - $CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/
   script:
     - echo "$CI_COMMIT_MESSAGE"
