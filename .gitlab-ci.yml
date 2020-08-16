@@ -4,6 +4,7 @@ stages:
 test-rules:
   stage: test
   rules:
+    # Don't run job if [skip] in commit message
     - if: '$CI_COMMIT_MESSAGE =~ /^\[skip\] .*$/'
       when: never
   script:
