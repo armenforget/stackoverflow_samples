@@ -1,6 +1,12 @@
 stages:
   - test
 
+# Control job that always runs
+test-control:
+  stage: test
+  script:
+    - echo "$CI_COMMIT_MESSAGE"
+
 test-rules:
   stage: test
   rules:
