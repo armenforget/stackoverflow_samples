@@ -7,7 +7,7 @@ test-control:
   script:
     - echo "$CI_COMMIT_MESSAGE"
 
-# Don't run job if [skip] in commit message...
+# Don't run job if [skip] in commit message
 test-rules:
   stage: test
   rules:
