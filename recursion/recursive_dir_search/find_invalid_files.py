@@ -1,4 +1,5 @@
 from pathlib import Path
+from PIL import Image
 
 
 def get_invalid_files_from(directory: Path) -> []:
@@ -13,6 +14,32 @@ def get_unpaired_files(directory: Path) -> []:
     json_files = get_files_without_extension(dir_path, pattern='*.json')
     png_files = get_files_without_extension(dir_path, pattern='*.png')
     return [str(f.absolute()) for f in set(json_files) ^ set(png_files)]
+
+
+def print_high_res_images(directory: str):
+    root_path = Path(directory).resolve()
+    high_res_images = get_high_res_images(root_path)
+
+    print('High resolution images:')
+    for file_path in high_res_images:
+        print(file_path)
+
+
+def get_high_res_images(root_path: Path) -> []:
+    return [path for path in root_path.rglob("*.*") if is_high_res_image(path)]
+
+
+def is_high_res_image(file_path: Path) -> bool:
+    if is_image(file_path):
+        image = Image.open(file_path)
+        width, height = image.size
+        return width > 2048 and height > 2048
+
+    return False
+
+
+def is_image(file: Path) -> bool:
+    return file.suffix.lower() in ['.png', '.jpg']
 
 
 def get_files_without_extension(dir_path: Path, pattern: str) -> []:
@@ -31,7 +58,9 @@ def is_filename_valid(file: Path, prefix: str) -> bool:
     return file.name.startswith(prefix)
 
 
-root_dir = Path(r'C:\temp')
+print_high_res_images('./folder3')
+
+root_dir = Path(r'D:\Projects\stackoverflow_samples')
 sub_dirs = [f for f in root_dir.iterdir() if f.is_dir()]
 
 for target_dir in sub_dirs:
